@@ -7,6 +7,9 @@ cd $MODULE_DIR
 # run tests and testable examples
 go test
 
+# get test coverage
+go test -cover
+
 # run benchmark tests
 go test -bench=.
 
