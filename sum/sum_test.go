@@ -7,6 +7,7 @@ import (
 
 func TestSum(t *testing.T) {
 	assertNumbersEqual := func(t testing.TB, got, want int, numbers []int) {
+		t.Helper()
 		if got != want {
 			t.Errorf("got %d want %d given, %v", got, want, numbers)
 		}
@@ -46,6 +47,7 @@ func TestSumAllTails(t *testing.T) {
 }
 
 func assertSlicesEqual(t testing.TB, got, want []int) {
+	t.Helper()
 	// NOTE: for 2D slices, use reflect.DeepEqual to compare
 	if !slices.Equal(got, want) {
 		t.Errorf("got %v want %v", got, want)
