@@ -1,15 +1,15 @@
 package iteration
 
-import "strings"
-
-const repeatCount = 5
+import (
+	"strings"
+)
 
 // Building instead of concatenating strings minimizes copying data
 // for new immutable strings
-func Repeat(char string) string {
+func Repeat(char string, length int) string {
 	var repeated strings.Builder
 
-	for i := 0; i < repeatCount; i++ {
+	for i := 0; i < length; i++ {
 		repeated.WriteString(char)
 	}
 
