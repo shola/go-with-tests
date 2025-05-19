@@ -5,6 +5,22 @@ import (
 	"testing"
 )
 
+func TestArea(t *testing.T) {
+	checkArea := func(t testing.TB, shape Shape, want float64) {
+		t.Helper()
+		got := shape.Area()
+		assertFloat(t, got, want)
+	}
+	t.Run("rectangle", func (t *testing.T) {
+		r := Rectangle{10.0, 10.0}
+		checkArea(t, r, 100.0)
+	})
+	t.Run("circles", func (t *testing.T) {
+		c := Circle{10.0}
+		checkArea(t, c, 100.0 * math.Pi)
+	})
+}
+
 func TestRectangle(t *testing.T) {
 	r := Rectangle{Height: 10.0, Width: 10.0}
 	t.Run("Perimeter", func (t *testing.T) {
@@ -24,6 +40,11 @@ func TestCircle(t *testing.T) {
 	t.Run("Perimeter", func (t *testing.T) {
 		got := c.Perimeter()
 		want := 2 * 10.0 * math.Pi
+		assertFloat(t, got, want)
+	})
+	t.Run("Area", func (t *testing.T) {
+		got := c.Area()
+		want := 10.0 * 10.0 * math.Pi
 		assertFloat(t, got, want)
 	})
 }
