@@ -10,9 +10,11 @@ type Rectangle struct {
 	Height float64
 	Width float64
 }
+// IMPORTANT: the sides should be in listed in ascending order!
 type Triangle struct {
-	Base float64
-	Height float64
+	A float64
+	B float64
+	C float64
 }
 type Circle struct {
 	Radius float64
@@ -35,9 +37,9 @@ func (c Circle) Area() float64 {
 }
 
 func (t Triangle) Area() float64 {
-	return t.Height * t.Base / 2
+	return t.A * t.B / 2
 }
 
 func (t Triangle) Perimeter() float64 {
-	return 0.0
+	return t.A + t.B + t.C
 }

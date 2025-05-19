@@ -15,13 +15,32 @@ func TestArea(t *testing.T) {
 	}{
 		{name: "Rectangle", shape: Rectangle{Height: 12, Width: 6}, hasArea: 72.0},
 		{name: "Circle", shape: Circle{Radius: 10}, hasArea: 314.1592653589793},
-		{name: "Triangle",shape: Triangle{Base: 12, Height: 6}, hasArea: 36.0},
+		{name: "Triangle",shape: Triangle{A: 3, B: 4, C: 5}, hasArea: 6.0},
 	}
 
 	for _, tt := range areaTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := tt.shape.Area()
 			assertShapeValue(t, tt.shape, got, tt.hasArea)
+		})
+	}
+}
+
+func TestPerimeter(t *testing.T) {
+	perimeterTests := []struct {
+		name string
+		shape Shape
+		hasPerimeter  float64
+	} {
+		{name: "Rectangle", shape: Rectangle{Height: 12, Width: 6}, hasPerimeter: 36.0},
+		{name: "Circle", shape: Circle{Radius: 10}, hasPerimeter: 2 * math.Pi * 10.0},
+		{name: "Triangle",shape: Triangle{A: 3, B: 4, C: 5}, hasPerimeter: 12.0},
+	}
+
+	for _, tt := range perimeterTests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := tt.shape.Perimeter()
+			assertShapeValue(t, tt.shape, got, tt.hasPerimeter)
 		})
 	}
 }
