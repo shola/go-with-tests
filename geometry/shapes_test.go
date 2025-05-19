@@ -5,19 +5,31 @@ import (
 	"testing"
 )
 
+// Table driven testing of interfaces make test suites easier
+// to extend and maintain
 func TestArea(t *testing.T) {
 	areaTests := []struct {
+		name string
 		shape Shape
-		want  float64
+		hasArea  float64
 	}{
-		{shape: Rectangle{Height: 12, Width: 6}, want: 72.0},
-		{shape: Circle{Radius: 10}, want: 314.1592653589793},
-		{shape: Triangle{Base: 12, Height: 6}, want: 36.0},
+		{name: "Rectangle", shape: Rectangle{Height: 12, Width: 6}, hasArea: 72.0},
+		{name: "Circle", shape: Circle{Radius: 10}, hasArea: 314.1592653589793},
+		{name: "Triangle",shape: Triangle{Base: 12, Height: 6}, hasArea: 36.0},
 	}
 
 	for _, tt := range areaTests {
-		got := tt.shape.Area()
-		assertFloat(t, got, tt.want)
+		t.Run(tt.name, func(t *testing.T) {
+			got := tt.shape.Area()
+			assertShapeValue(t, tt.shape, got, tt.hasArea)
+		})
+	}
+}
+
+func assertShapeValue(t testing.TB, shape Shape, got, want float64) {
+	t.Helper()
+	if got != want {
+		t.Errorf("%#v got %g want %g", shape, got, want)
 	}
 }
 
