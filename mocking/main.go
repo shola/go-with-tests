@@ -1,3 +1,5 @@
 package main
 
-func Countdown() {}
+import "io"
+
+func Countdown(out io.Writer) {}
