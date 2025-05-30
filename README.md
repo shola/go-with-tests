@@ -5,16 +5,16 @@ Exercises from https://quii.gitbook.io/learn-go-with-tests
 cd $MODULE_DIR
 
 # run tests and testable examples
-go test
+go test example.com/hello/maps
 
 # get test coverage
-go test -cover
+go test example.com/hello/di -cover
 
 # run benchmark tests
-go test -bench=.
+go test example.com/hello/concurrency -bench=.
 
 # run memory benchmark tests
-go test -bench=. -benchmem
+go test example.com/hello/concurrency -bench=. -benchmem
 
 # # example memory benchmark output
 # goos: linux
