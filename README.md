@@ -13,6 +13,9 @@ go test example.com/hello/di -cover
 # run benchmark tests
 go test example.com/hello/concurrency -bench=.
 
+# test for race conditions
+go test example.com/hello/concurrency -race
+
 # run memory benchmark tests
 go test example.com/hello/concurrency -bench=. -benchmem
 
