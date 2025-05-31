@@ -19,6 +19,9 @@ go test shola.com/gwt/concurrency -race
 # run memory benchmark tests
 go test shola.com/gwt/concurrency -bench=. -benchmem
 
+# find subtle bugs in code
+go vet shola.com/gwt/sync
+
 # # example memory benchmark output
 # goos: linux
 # goarch: amd64

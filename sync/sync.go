@@ -2,9 +2,15 @@ package main
 
 import "sync"
 
+// Use channels when passing ownership of data
+// Use mutexes for managing state
 type Counter struct {
 	mu sync.Mutex
 	value int
+}
+
+func NewCounter() *Counter {
+	return &Counter{}
 }
 
 func (c *Counter) Inc() {
