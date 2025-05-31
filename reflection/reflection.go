@@ -9,6 +9,8 @@ func walk(x interface{}, fn func(input string)) {
 		walk(value.Interface(), fn)
 	}
 	switch val.Kind() {
+	case reflect.String:
+		fn(val.String())	
 	case reflect.Struct:
 		for i := 0; i < val.NumField(); i++ {
 			walkValue(val.Field(i))
@@ -21,8 +23,14 @@ func walk(x interface{}, fn func(input string)) {
 		for i := 0; i < val.Len(); i++ {
 			walkValue(val.Index(i))
 		}
-	case reflect.String:
-		fn(val.String())
+	case reflect.Chan:
+		for {
+			if v, ok := val.Recv(); ok {
+				walkValue(v)
+			} else {
+				break
+			}
+		}
 	}
 }
 
