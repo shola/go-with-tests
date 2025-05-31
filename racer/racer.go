@@ -2,22 +2,29 @@ package racer
 
 import (
 	"net/http"
-	"time"
 )
 
 func Racer(a, b string) (winner string) {
-	aDuration := measureResponseTime(a)
-	bDuration := measureResponseTime(b)
-
-	if aDuration < bDuration {
+	// `select` allows you to wait on multiple channels, and the
+	// first one wins
+	select {
+	case <-ping(a):
 		return a
+	case <-ping(b):
+		return b
 	}
-
-	return b
 }
 
-func measureResponseTime(url string) time.Duration {
-	start := time.Now()
-	http.Get(url)
-	return time.Since(start)
+// an empty struct uses the least amount of memory of any
+// datatype, it's used because it's the most lightweight
+func ping(url string) chan struct{} {
+	// channels must be created with make. create a channel as
+	// a var without init will make it nil, which will block
+	// forever
+	ch := make(chan struct{})
+	go func() {
+		http.Get(url)
+		close(ch)
+	}()
+	return ch
 }
