@@ -15,7 +15,7 @@ const (
 type Post struct {
 	Title       string
 	Description string
-	Tags        string
+	Tags        []string
 }
 
 func newPost(postFile io.Reader) (Post, error) {
@@ -27,11 +27,17 @@ func newPost(postFile io.Reader) (Post, error) {
 		return val
 	}
 
+	readMetaLineList := func(tagName string) []string {
+		scanner.Scan()
+		val := strings.TrimPrefix(scanner.Text(), tagName)
+		return strings.Split(val, ",")
+	}
+
 	// TODO: add error handling
 
 	return Post{
 		Title:       readMetaLine(titleSeparator),
 		Description: readMetaLine(descriptionSeparator),
-		Tags:        readMetaLine(tagsSeparator),
+		Tags:        readMetaLineList(tagsSeparator),
 	}, nil
 }
