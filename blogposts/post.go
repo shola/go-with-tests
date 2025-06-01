@@ -9,12 +9,13 @@ import (
 const (
 	titleSeparator       = "Title: "
 	descriptionSeparator = "Description: "
+	tagsSeparator        = "Tags: "
 )
 
 type Post struct {
 	Title       string
 	Description string
-	Tags        []string
+	Tags        string
 }
 
 func newPost(postFile io.Reader) (Post, error) {
@@ -22,7 +23,8 @@ func newPost(postFile io.Reader) (Post, error) {
 
 	readMetaLine := func(tagName string) string {
 		scanner.Scan()
-		return strings.TrimPrefix(scanner.Text(), tagName)
+		val := strings.TrimPrefix(scanner.Text(), tagName)
+		return val
 	}
 
 	// TODO: add error handling
@@ -30,5 +32,6 @@ func newPost(postFile io.Reader) (Post, error) {
 	return Post{
 		Title:       readMetaLine(titleSeparator),
 		Description: readMetaLine(descriptionSeparator),
+		Tags:        readMetaLine(tagsSeparator),
 	}, nil
 }

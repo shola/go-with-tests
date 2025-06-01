@@ -47,7 +47,7 @@ Tags: engineering, reference`
 	want := blogposts.Post{
 		Title:       "Post 1",
 		Description: "Description 1",
-		Tags:        []string{"go", "tdd"},
+		Tags:        "go, tdd",
 	}
 
 	assertPost(t, got, want)
