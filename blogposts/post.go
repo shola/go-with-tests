@@ -27,17 +27,11 @@ func newPost(postFile io.Reader) (Post, error) {
 		return val
 	}
 
-	readMetaLineList := func(tagName string) []string {
-		scanner.Scan()
-		val := strings.TrimPrefix(scanner.Text(), tagName)
-		return strings.Split(val, ",")
-	}
-
 	// TODO: add error handling
 
 	return Post{
 		Title:       readMetaLine(titleSeparator),
 		Description: readMetaLine(descriptionSeparator),
-		Tags:        readMetaLineList(tagsSeparator),
+		Tags:        strings.Split(readMetaLine(tagsSeparator), ","),
 	}, nil
 }
