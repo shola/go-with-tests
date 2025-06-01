@@ -1,8 +1,12 @@
 package blogposts_test
 
+// best practice to put tests in their own package
+
 import (
 	"testing"
 	"testing/fstest"
+
+	blogposts "github.com/shola/blogposts"
 )
 
 func TestNewBlogPosts(t *testing.T) {
