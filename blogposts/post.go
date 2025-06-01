@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	titleSeparator       = "Title:"
-	descriptionSeparator = "Description:"
+	titleSeparator       = "Title: "
+	descriptionSeparator = "Description: "
 )
 
 type Post struct {
