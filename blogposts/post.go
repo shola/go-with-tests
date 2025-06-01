@@ -32,6 +32,6 @@ func newPost(postFile io.Reader) (Post, error) {
 	return Post{
 		Title:       readMetaLine(titleSeparator),
 		Description: readMetaLine(descriptionSeparator),
-		Tags:        strings.Split(readMetaLine(tagsSeparator), ","),
+		Tags:        strings.Split(readMetaLine(tagsSeparator), ", "),
 	}, nil
 }
