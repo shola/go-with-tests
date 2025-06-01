@@ -23,10 +23,17 @@ func TestNewBlogPosts(t *testing.T) {
 	const (
 		firstBody = `Title: Post 1
 Description: Description 1
-Tags: go, tdd`
+Tags: go, tdd
+---
+Hello
+World`
 		secondBody = `Title: Post 2
 Description: Description 2
-Tags: engineering, reference`
+Tags: engineering, reference
+---
+B
+L
+M`
 	)
 	// setup in-memory FS for testing purposes
 	fs := fstest.MapFS{
@@ -48,6 +55,8 @@ Tags: engineering, reference`
 		Title:       "Post 1",
 		Description: "Description 1",
 		Tags:        []string{"go", "tdd"},
+		Body: `Hello
+World`,
 	}
 
 	assertPost(t, got, want)
