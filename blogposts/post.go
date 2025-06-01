@@ -14,6 +14,7 @@ const (
 type Post struct {
 	Title       string
 	Description string
+	Tags        []string
 }
 
 func newPost(postFile io.Reader) (Post, error) {
