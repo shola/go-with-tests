@@ -7,18 +7,15 @@ type Transaction struct {
 }
 
 func BalanceFor(transactions []Transaction, name string) float64 {
-	// createLedger := func(accum float64, item Transaction) Transaction {
-	// 	// do addition and subtraction for each in the pair
-	// }
-	// return Reduce(transactions, createLedger, 0.0)
-	var balance float64
-	for _, t := range transactions {
-		if t.From == name {
-			balance -= t.Sum
+
+	adjustBalance := func(accum float64, item Transaction) float64 {
+		if item.From == name {
+			return accum - item.Sum
 		}
-		if t.To == name {
-			balance += t.Sum
+		if item.To == name {
+			return accum + item.Sum
 		}
+		return accum
 	}
-	return balance
+	return Reduce(transactions, adjustBalance, 0.0)
 }

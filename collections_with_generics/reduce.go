@@ -1,6 +1,6 @@
 package collections
 
-func Reduce[T any](list []T, fn func(accum, item T) T, initialValue T) T {
+func Reduce[A, B any](list []A, fn func(B, A) B, initialValue B) B {
 	res := initialValue
 
 	for _, v := range list {
