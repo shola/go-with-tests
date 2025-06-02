@@ -1,6 +1,9 @@
 package collections
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestFind(t *testing.T) {
 	t.Run("find first even number", func(t *testing.T) {
@@ -11,6 +14,24 @@ func TestFind(t *testing.T) {
 		})
 		AssertTrue(t, found)
 		AssertEqual(t, firstEvenNumber, 2)
+	})
+
+	type Person struct {
+		Name string
+	}
+	t.Run("find the best programmer", func(t *testing.T) {
+		people := []Person{
+			{Name: "Kent Beck"},
+			{Name: "Martin Fowler"},
+			{Name: "Chris James"},
+		}
+
+		king, found := Find(people, func(p Person) bool {
+			return strings.Contains(p.Name, "Chris")
+		})
+
+		AssertTrue(t, found)
+		AssertEqual(t, king, Person{Name: "Chris James"})
 	})
 }
 
